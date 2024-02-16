@@ -27,7 +27,7 @@ export class SheetManager {
       scopes: SCOPES,
     });
 
-    this.doc = new GoogleSpreadsheet(sheetId, this.jwt);    
+    this.doc = new GoogleSpreadsheet(sheetId, this.jwt);
   }
 
   async init(userPath: string) {
@@ -46,9 +46,9 @@ export class SheetManager {
   }
 
   /**
-   * 
+   *
    * @param {number} sheetPosition  the position of the sheet in the spreadsheet (0 is the first sheet)
-   * @returns 
+   * @returns
    */
   async read(sheetPosition:number=0): Promise<any> {
     if(sheetPosition < 0){
@@ -66,19 +66,19 @@ export class SheetManager {
         //@ts-ignore
         result[title] = result[title] || [];
         const key = row.get(colTitles[0]);
-        if (key.includes(".")) {
-          const keys = key.split(".");
-          result = {
-            ...result,
-            [title]: {
-              ...result[title],
-              [keys[0]]: {
-                ...result[title][keys[0]],
-                [keys[1]]: row.get(title) !== "" ? row.get(title) : undefined,
-              },
-            },
-          };
-        } else {
+        // if (key.includes(".")) {
+        //   const keys = key.split(".");
+        //   result = {
+        //     ...result,
+        //     [title]: {
+        //       ...result[title],
+        //       [keys[0]]: {
+        //         ...result[title][keys[0]],
+        //         [keys[1]]: row.get(title) !== "" ? row.get(title) : undefined,
+        //       },
+        //     },
+        //   };
+        // } else {
           result = {
             ...result,
             [title]: {
@@ -86,7 +86,7 @@ export class SheetManager {
               [key]: row.get(title) !== "" ? row.get(title) : undefined,
             },
           };
-        }
+        // }
       });
     });
 
